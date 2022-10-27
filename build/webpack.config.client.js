@@ -3,7 +3,7 @@ const base = require("./webpack.config.base");
 const merge = require("webpack-merge");
 const webpack = require("webpack");
 
-// const ClientPlugin = require("vue-server-renderer/client-plugin");
+const ClientPlugin = require("vue-server-renderer/client-plugin");
 const WorkerPlugin = require("sw-precache-webpack-plugin");
 
 const config = require("../config");
@@ -29,7 +29,7 @@ const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: "manifest",
   }),
-  // new ClientPlugin(),
+  new ClientPlugin(),
 ];
 
 if (process.env.NODE_ENV === "production") {
