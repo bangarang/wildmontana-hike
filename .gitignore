@@ -1,0 +1,8 @@
+.DS_Store
+.buildpath
+.project
+.settings/
+.env
+ssr-client-dist/
+node_modules/
+npm-debug.log

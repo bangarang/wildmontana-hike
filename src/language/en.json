@@ -1,0 +1,73 @@
+{
+  "add_trail": "Add a Trail",
+  "short_add_trail": "+ Trail",
+  "add_trail_report": "Add a Trail Report",
+  "back": "Back",
+  "by": "By {name}",
+  "close": "Close",
+  "confirm": {
+    "signup": "Your account has been created! To get started, [log in here](https://app.elebase.io)."
+  },
+  "copyright": "Copyright © {year} {org}",
+  "count": "Displaying {n} trails",
+  "count_fraction": "Displaying {n} of {t} trails",
+  "directions": "Directions",
+  "email": "Email",
+  "entries": "Trails",
+  "error": {
+    "config_error": "Sorry, this feature has not been configured or enabled yet.",
+    "email_not_provided": "@:error.invalid_email",
+    "internal_error": "There was a problem processing your request. Please try again later.",
+    "invalid_email": "Please enter a valid email address.",
+    "invalid_fields": "Please provide valid input for all required fields.",
+    "invalid_name": "Please provide your first and last name.",
+    "invalid_password": "Please enter a valid password (length must be 8-72 characters).",
+    "undefined": "Sorry, there was a problem processing your submission. Please try again later.",
+    "user_exists": "Sorry, an account with that email address already exists."
+  },
+  "featured": "Featured",
+  "filter": "Trail Features",
+  "first_name": "First name",
+  "get_directions": "Get Directions",
+  "visit_website": "Visit Website",
+  "last_name": "Last name",
+  "city": "City",
+  "state": "State",
+  "zip": "Zip",
+  "loading": "Loading trails",
+  "nearby": "Nearby Businesses",
+  "network": {
+    "facebook": "Facebook",
+    "pinterest": "Pinterest",
+    "twitter": "Twitter"
+  },
+  "org_name": "Montana Wilderness Association",
+  "other_places": "Other Places",
+  "password": "Password",
+  "reset": "Reset",
+  "search": "Search",
+  "show_list": "Show List",
+  "show_map": "Show Map",
+  "site_description": "A guide to Montana trails curated by the Montana Wilderness Association.",
+  "site_name": "Hike Wild Montana",
+  "submit": "Submit",
+  "submitting": "Submitting",
+  "view_details": "View details",
+  "walk": "Wilderness Walk",
+  "warning": {
+    "browser": {
+      "title": "Your browser is out of date.",
+      "info": "This site may not function properly in your current browser.",
+      "link": "Update Now"
+    }
+  },
+  "website": "Website",
+  "show_trail_details": "Show Trail Details",
+  "hide_trail_details": "Hide Trail Details",
+  "distance": "Distance",
+  "elevation": "Elevation Gain",
+  "protect_wilderness_intro": "Take action to protect the landscapes you love and enjoy, now and for the future.",
+  "sponsor_intro_text": "These companies and organizations help support this hiking guide. We hope you'll support them in return.",
+  "no_thanks": "No Thanks",
+  "share": "Share"
+}
