@@ -61,8 +61,8 @@ const renderer = (bundle, options) => {
 
 let ren, ready;
 if (prod) {
-  const bundle = require('./ssr-client-dist/vue-ssr-server-bundle.json');
-  const manifest = require('./ssr-client-dist/vue-ssr-client-manifest.json');
+  const bundle = require('./dist/vue-ssr-server-bundle.json');
+  const manifest = require('./dist/vue-ssr-client-manifest.json');
   ren = renderer(bundle, { clientManifest: manifest });
 
   // Force incoming requests to use HTTPS in any non-development environment.
