@@ -8,6 +8,7 @@ const lru = require('lru-cache');
 const parser = { body: require('body-parser') };
 const path = require('path');
 const rc = require('route-cache');
+const cors = require('cors');
 
 parser.json = parser.body.json();
 
@@ -37,7 +38,7 @@ const config = {
 };
 
 const app = express();
-
+app.use(cors());
 // Determine if the response to a given request is eligible for server-side, in-memory caching.
 const cacheable = req => {
   return prod && req.method === 'GET' && req.query.preview !== 'true';
