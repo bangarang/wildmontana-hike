@@ -274,7 +274,7 @@ export default {
         options: {
           fit: false,
           scrollZoom: false,
-          style: config.geo.styles,
+          style: config.geo.styles[config.geo.style],
         },
         styles: config.geo.styles,
       },
