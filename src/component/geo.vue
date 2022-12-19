@@ -17,7 +17,6 @@
 import bbox from "@turf/bbox";
 import config from "../../config";
 import "../../node_modules/mapbox-gl/dist/mapbox-gl.css";
-// import geo_style from "../style.json";
 let GL;
 const ctx = typeof window != "undefined" ? "client" : "server";
 if (ctx === "client") GL = require("mapbox-gl");

@@ -179,7 +179,7 @@ import Top from "../component/top.vue";
 import Banner from "../component/banner.vue";
 import Modal from "../component/modal.vue";
 import ProtectWilderness from "../component/protect-wilderness.vue";
-import geo_style from "../style.json";
+// import geo_style from "../style.json";
 import config from "../../config";
 import features from "../utility/features";
 
@@ -274,9 +274,9 @@ export default {
         options: {
           fit: false,
           scrollZoom: false,
-          style: geo_style,
+          style: config.geo.styles,
         },
-        styles: geo_style,
+        styles: config.geo.styles,
       },
       loading: null,
       pane: { active: "map" },
