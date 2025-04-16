@@ -6,3 +6,7 @@
 ssr-client-dist/
 node_modules/
 npm-debug.log
+bucket
+dist
+.idea
+.vscode

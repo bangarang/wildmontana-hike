@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="app">
     <!-- REMOVE BEFORE PROD PUSH   -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://8e4df766c4.nxcli.net/wp-content/themes/wild-montana-flynt/dist/assets/main.css"
-    />
+    /> -->
     <ui-warning></ui-warning>
-    <transition name="fade" mode="out-in">
+    <transition>
       <router-view class="view" :key="key"></router-view>
     </transition>
   </div>
@@ -45,15 +45,20 @@ export default {
 </script>
 
 <style>
+.description .data {
+  color: #fff;
+}
+</style>
+<style scoped>
 #app,
 .view {
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100dvh - 75px);
   position: relative;
 }
 
 .detail-view main a:not(.button) {
-  color: #8d1d1a;
+  color: #b05c5c;
 }
 
 .content p,
@@ -123,12 +128,10 @@ h6:hover .anchor > .icon {
   display: block;
   padding: 1rem 0;
   line-height: 1;
-  cursor: pointer;
-  transition: opacity var(--duration-short);
 }
 
-.networks span:hover {
-  opacity: 0.7;
+.networks a:hover {
+  color: gold;
 }
 
 .networks .icon {
@@ -138,5 +141,11 @@ h6:hover .anchor > .icon {
 
 .info .share-menu {
   right: 0px !important;
+}
+@media (max-width: 720px) {
+  .subheading {
+    text-align: left;
+    line-height: 1.5;
+  }
 }
 </style>

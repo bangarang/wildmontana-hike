@@ -9,29 +9,17 @@
       :options="options"
       ref="geo"
     >
-      <template v-slot:buttons>
-        <div class="buttons">
-          <div v-if="styles" class="styles">
-            <div
-              v-for="(s, k) in styles"
-              :class="'style style-' + k + (options.style == s ? ' active' : '')"
-              :style="{ backgroundImage: 'url(/static/' + k + '.png)' }"
-              @click="changeStyle(k)"
-            ><div class="state"></div></div>
-          </div>
-        </div>
-      </template>
     </ui-geo>
     <div v-else-if="variant == 'businesses' && entries.length" class="businesses">
-<!--      <p v-if="label" class="subheading">{{ label }}</p>-->
-      <ui-list :entries="entries"></ui-list>
+      <!--      <p v-if="label" class="subheading">{{ label }}</p>-->
+      <ui-list :entries="entries" :config="{ type: 'swiper' }"></ui-list>
     </div>
   </div>
 </template>
 
 <script>
   import Geo from '../geo.vue';
-  import List from '../list.vue';
+  import List from '../list-swiper.vue';
   import features from '../../utility/features';
   import config from '../../../config';
 

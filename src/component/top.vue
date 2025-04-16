@@ -337,5 +337,9 @@ export default {
   .signup-button-label {
     display: none;
   }
+  .top .top-filters .panel {
+    max-width: 100vw;
+    padding: 1rem;
+  }
 }
 </style>

@@ -188,9 +188,6 @@ export default {
 }
 
 @media (max-width: 688px) {
-  .form-wrapper {
-    padding: 10px;
-  }
   .form-wrapper .form-field {
     flex-direction: column;
   }

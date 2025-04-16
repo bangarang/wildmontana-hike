@@ -9,9 +9,9 @@ const router = Router => {
     routes: [],
     scrollBehavior(to, from, xy) {
       // console.log('scrollBehavior', {to, from, xy})
-      document.getElementById('app').scrollIntoView({
-        behavior: 'smooth'
-      });
+      // document.getElementById('app').scrollIntoView({
+      //   behavior: 'smooth'
+      // });
       if (xy) {
         if (to.path === from.path) return xy;
         return new Promise(resolve => setTimeout(() => resolve(xy), 1000));
@@ -20,7 +20,7 @@ const router = Router => {
       if (to.hash) {
         const selector = to.hash;
         const offset = { y: 0 };
-        if (document.querySelector(to.hash)) return { selector, offset };
+        // if (document.querySelector(to.hash)) return { selector, offset };
       }
 
       return new Promise(resolve => setTimeout(() => resolve({ x: 0, y: 0 }), 500));
@@ -33,6 +33,13 @@ const router = Router => {
       name: 'entry',
       path: '/hike/entries/:id',
       props: route => ({ id: route.params.id })
+    },
+    trail: {
+      component: IndexView,
+      name: 'index',
+      path: '/hike/trail/:id',
+      meta: { params: { type: [config.id.type.trail] } },
+      props: route => ({ title: route.params.id || route.query.trail || '' })
     },
     index: {
       component: IndexView,

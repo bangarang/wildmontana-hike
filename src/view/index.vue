@@ -113,31 +113,6 @@
         @deselected="deselect"
         @touched="touch"
       >
-        <template v-slot:buttons>
-          <div class="buttons">
-            <ui-button
-              class="toggle-button menu-button button-clear"
-              icon="menu"
-              icon-size="2.8rem"
-              color="#111"
-              :title="$t('show_list')"
-              @click.native="toggleActivePane"
-            ></ui-button>
-            <div v-if="geo.styles" class="styles">
-              <div
-                v-for="(v, k) in geo.styles"
-                :class="
-                  'style style-' + k + (geo.options.style == v ? ' active' : '')
-                "
-                :style="{ backgroundImage: 'url(/static/' + k + '.png)' }"
-                :title="k[0].toUpperCase() + k.slice(1)"
-                @click="changeMapStyle(k)"
-              >
-                <div class="state"></div>
-              </div>
-            </div>
-          </div>
-        </template>
       </ui-geo>
       <div v-else class="loading">{{ $t("loading") }}...</div>
       <!-- Info panel -->
@@ -182,7 +157,7 @@ import ProtectWilderness from "../component/protect-wilderness.vue";
 // import geo_style from "../style.json";
 import config from "../../config";
 import features from "../utility/features";
-
+import queryString from "query-string";
 export default {
   name: "index-view",
   metadata() {
@@ -275,6 +250,7 @@ export default {
           fit: false,
           scrollZoom: false,
           style: config.geo.styles[config.geo.style],
+          cooperativeGestures: true,
         },
         styles: config.geo.styles,
       },
@@ -354,7 +330,6 @@ export default {
           if (el.type !== "option" || !Array.isArray(el.data)) continue;
           if (!el.groups.length || !el.groups.includes(gid)) continue;
           for (const o of el.data) {
-            // console.log({ o });
             if (oids.includes(o.id)) continue;
             if (!filters[el.id])
               filters[el.id] = { name: el.name, options: [] };
@@ -364,6 +339,7 @@ export default {
           }
         }
       }
+      console.log({ filters, oids, active: this.filter.active });
 
       if (!Object.keys(filters).length) {
         return null;
@@ -481,6 +457,8 @@ export default {
         else if (typeof v == "string") params[p] = v;
       }
 
+      console.log({ params });
+
       let page = 1;
       const limit = 25;
       // const total = this.$store.state.total || 0;
@@ -544,19 +522,22 @@ export default {
       if (this.$route.query.trail) {
         this.$router.replace({ query: {} });
       }
+      history.replaceState({}, "", "/hike");
       // this.selected = "";
       // this.$store.commit("selected", "");
       this.panel.info.open = false;
       this.panel.info.tall = false;
 
       // console.log({ panel: this.panel.info });
-      window.dataLayer.push({
-        event: "Hide Trail Details",
-        pageUrl: window.location.href, //URL shown in URL bar
-        pageTitle: `Hike Wild Montana - ${this.entry.title}`, //site name - {trail name},
-        trailName: this.entry.title,
-        action: "Trail Detail Deselected",
-      });
+      if (this.entry) {
+        window.dataLayer.push({
+          event: "Hide Trail Details",
+          pageUrl: window.location.href, //URL shown in URL bar
+          pageTitle: `Hike Wild Montana - ${this.entry.title}`, //site name - {trail name},
+          trailName: this.entry.title,
+          action: "Trail Detail Deselected",
+        });
+      }
 
       this.$nextTick(() => {
         this.selected = "";
@@ -643,16 +624,16 @@ export default {
     scrollTo(id) {
       if (!id) return;
 
-      this.$nextTick(() => {
-        this.$scrollTo("#list-item-" + id, {
-          container: ".pane-list",
-          easing: "ease-out",
-          offset: -90,
-          onDone: () => {
-            this.scrolling = false;
-          },
-        });
-      });
+      // this.$nextTick(() => {
+      //   this.$scrollTo("#list-item-" + id, {
+      //     container: ".pane-list",
+      //     easing: "ease-out",
+      //     offset: -90,
+      //     onDone: () => {
+      //       this.scrolling = false;
+      //     },
+      //   });
+      // });
     },
     select(title, ctx = "list") {
       if (!title) return;
@@ -705,15 +686,24 @@ export default {
       this.pane.active = "map";
       this.search.open = false;
       this.panel.info.open = !!this.selected;
-      this.$router.replace(
-        this.selected ? { query: { trail: title } } : { query: {} }
+      // console.log('SELECTED => ', { selected: this.selected, title, ctx })
+      history.replaceState(
+        {},
+        "",
+        this.selected && title ? `/hike/trail/${title}` : "/hike"
       );
+      // this.$router.replace(
+      //   this.selected ? { params: `/hike/trail/${title}`, } : { path: "/hike"}
+      // );
+      // this.$router.replace(
+      //   this.selected ? { path: `/hike/trail/${title}` } : { path: '/hike' }
+      // );
 
       this.showWildernessProtection();
 
       if (this.panel.info.open) {
-        const panel = document.querySelector(".info .panel");
-        if (panel) panel.scrollTop = 0;
+        // const panel = document.querySelector(".info .panel");
+        // if (panel) panel.scrollTop = 0;
       }
 
       if (this.selected && ctx !== "list" && !this.scrolling) {
@@ -758,7 +748,7 @@ export default {
       }
 
       if (el.startsWith("geo") && this.panel.info.tall) {
-        panel.scrollTop = 0;
+        // panel.scrollTop = 0;
         this.panel.info.tall = false;
       }
 
@@ -801,25 +791,50 @@ export default {
       }
     },
     updateFilters(filters) {
+      console.log("UPDATE FILTERS", { filters });
       this.geo.options.fit = true;
       this.deselect();
       this.filter.active = Object.keys(filters)
         .map((k) => filters[k].options.filter((o) => o.active).map((o) => o.id))
         .reduce((all, one) => all.concat(one), []);
+
+      this.updateFilterParam();
+      // this.$router.replace({ path: this.$route.path, query: { ...this.$route.query, filter: query } });
+    },
+    setFromQueryParams(query) {
+      const { open, distance, ...rest } = query;
+      console.log("QUERY", { query, rest });
+      if (rest) {
+        console.log("SET FROM QUERY PARAMS", { rest });
+        this.filter = { ...this.filter, ...rest };
+      }
     },
     updateRoundtripDistance(roundtripDistance) {
       this.geo.options.fit = true;
       this.deselect();
       this.filter.roundtripDistance = roundtripDistance;
+      this.updateFilterParam();
     },
     updateElevationGain(elevationGain) {
       this.geo.options.fit = true;
       this.deselect();
       this.filter.elevationGain = elevationGain;
+      this.updateFilterParam();
+    },
+    updateFilterParam() {
+      console.log("UPDATED FILTERS", { filters: this.filter });
+      const query = queryString.stringify(this.filter, {
+        arrayFormat: "comma",
+      });
+      history.replaceState({}, "", window.location + "?" + query);
     },
   },
   mounted() {
-    // console.log("INDEX MOUNTED", { dataLayer: window.dataLayer });
+    console.log("INDEX MOUNTED", { route: this.$route });
+
+    const query = this.$route.query;
+    this.setFromQueryParams(query);
+
     if (this.$store.state.iframed !== true) {
       this.geo.options.scrollZoom = true;
     }
@@ -844,6 +859,7 @@ export default {
         this.$store.commit("selected", this.id);
         this.selected = this.id;
         this.panel.info.open = true;
+        this.panel.info.tall = true;
       }
     });
 

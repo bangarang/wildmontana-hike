@@ -1,24 +1,19 @@
 <template>
   <div class="element-entry">
-
     <div class="data">
-      <ui-list :entries="entries" :slug="slug"></ui-list>
-    </div>
-    <div class="signup">
-      <router-link
-        replace
-        :to="{ name: 'signup' }"
-        class="button signup-button"
-      >
-        <ui-icon name="report" size="1.5rem"></ui-icon>
-        {{ $t("add_trail_report") }}
-      </router-link>
+      <ui-list-swiper
+        v-if="this.element.config.type === 'swiper'"
+        :entries="entries"
+        :slug="slug"
+      ></ui-list-swiper>
+      <ui-list v-else :entries="entries" :slug="slug"></ui-list>
     </div>
   </div>
 </template>
 
 <script>
 import List from "../list.vue";
+import ListSwiper from "../list-swiper.vue";
 import Icon from "../../component/icon.vue";
 import config from "../../../config";
 
@@ -26,6 +21,7 @@ export default {
   name: "element-entry",
   components: {
     "ui-list": List,
+    "ui-list-swiper": ListSwiper,
     "ui-icon": Icon,
   },
   props: {
@@ -40,14 +36,18 @@ export default {
   data() {
     return {
       entries: [],
+      entriesSwiperInitialized: false,
+      entriesSwiperActive: 0,
     };
   },
   methods: {
     async getEntries() {
+      console.log("ELEMENT GET ENTRIES", this.element);
       const phases = config.elebase.phases;
       const entries = this.element.data.filter((en) =>
         phases.includes(en.phase)
       );
+      console.log({ entries });
       const ordinals = Object.fromEntries(entries.map((en, i) => [en.id, i]));
 
       try {
@@ -71,7 +71,19 @@ export default {
       this.entries.sort((a, b) => a.ordinal - b.ordinal);
     },
   },
+  nextEntry() {
+    if (this.entrySwiperActive < this.newEntryEntries.length - 1) {
+      this.entrySwiperActive += 1;
+    }
+  },
+
+  previousEntry() {
+    if (this.entrySwiperActive > 0) {
+      this.EntrySwiperActive -= 1;
+    }
+  },
   mounted() {
+    console.log("ELEMENT MOUNTED", this.element);
     this.getEntries();
   },
 };

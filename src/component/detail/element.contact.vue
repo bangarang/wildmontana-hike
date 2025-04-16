@@ -166,4 +166,7 @@
   .phone a, .url a {
     display: block;
   }
+  .organization-large {
+    font-size: 1.3rem;
+  }
 </style>

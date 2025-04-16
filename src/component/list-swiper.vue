@@ -1,0 +1,239 @@
+<template>
+  <div class="list clearfix swiper-container">
+    <div
+      class="swiper-wrapper"
+      :style="`transform: translateX(-${activeEntry * 100}%);`"
+    >
+      <router-link
+        replace
+        :key="en.id"
+        v-for="en of entries"
+        :to="getRoute(en)"
+        class="list-item swiper-slide"
+      >
+        <div v-if="en.image" class="list-item-left">
+          <!-- :src="en.image.url + '?w=150&h=150&fit=crop&q=90'" -->
+          <img class="list-item-image" :src="en.image.url" :alt="en.title" />
+        </div>
+        <div class="list-item-right">
+          <div v-if="en.subtitle" class="list-item-subtitle">
+            {{ en.subtitle }}
+          </div>
+          <p class="list-item-title">{{ en.title }}</p>
+          <div class="learn-more-button">
+            <p class="sans white">Learn More</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30.895"
+              height="10.723"
+              viewBox="0 0 30.895 10.723"
+            >
+              <g
+                id="Componente_3_51"
+                data-name="Componente 3 – 51"
+                transform="translate(1.5)"
+              >
+                <path
+                  id="Trazado_115"
+                  data-name="Trazado 115"
+                  d="M943,5328.771h19.892"
+                  transform="translate(-943 -5323.409)"
+                  fill="none"
+                  stroke="#fffefa"
+                  stroke-linecap="round"
+                  stroke-width="3"
+                />
+                <path
+                  id="Trazado_125"
+                  data-name="Trazado 125"
+                  d="M4.765.345a.689.689,0,0,1,1.194,0L10.63,8.47a.689.689,0,0,1-.6,1.032H.69a.689.689,0,0,1-.6-1.032Z"
+                  transform="translate(29.395 0) rotate(90)"
+                  fill="#fffefa"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </router-link>
+    </div>
+    <div v-if="entries.length > 1" class="nav prev" @click="previousEntry">
+      <ui-icon name="arrow-left" size="2.2rem"></ui-icon>
+    </div>
+    <div v-if="entries.length > 1" @click="nextEntry" class="nav next">
+      <ui-icon name="arrow-right" size="2.2rem"></ui-icon>
+    </div>
+  </div>
+</template>
+
+<script>
+import Icon from "./icon.vue";
+export default {
+  name: "ui-list-swiper",
+  components: {
+    "ui-icon": Icon,
+  },
+  props: {
+    entries: {
+      type: Array,
+      required: true,
+    },
+    slug: {
+      type: String | undefined,
+    },
+  },
+
+  data() {
+    return {
+      entriesSwiperInitialized: false,
+      activeEntry: 0,
+    };
+  },
+  methods: {
+    getRoute(en) {
+      console.log("getRoute", { en, slug: this.slug });
+      const route = this.$router.options.routes.find(
+        (r) => r.meta && r.meta.id === en.id
+      );
+      if (this.slug) {
+        return route
+          ? { name: route.name }
+          : { name: "entry", params: { id: en.id, slug: this.slug } };
+      } else {
+        return route
+          ? { name: route.name }
+          : { name: "entry", params: { id: en.id } };
+      }
+    },
+    nextEntry() {
+      console.log("nextEntry", this.activeEntry);
+      if (this.activeEntry < this.entries.length - 1) {
+        this.activeEntry += 1;
+      }
+    },
+
+    previousEntry() {
+      console.log("previousEntry", this.activeEntry);
+      if (this.activeEntry > 0) {
+        this.activeEntry -= 1;
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+.list-item {
+  margin-bottom: 1rem;
+  background: #163c47 !important;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+@media (min-width: 720px) {
+  .list-item {
+    margin-bottom: 10px;
+  }
+  .list-item-left {
+    margin-right: 15px;
+    width: 150px;
+    flex: 1 0 150px;
+  }
+}
+
+.list-item-image {
+  display: block;
+  min-height: 100%;
+  margin-right: 20px;
+  object-fit: cover;
+  max-height: 150px;
+}
+
+.list-item-image,
+.list-item-image > img {
+  border-radius: 8px;
+}
+
+.list-item-right {
+  display: inline-block;
+  vertical-align: top;
+  padding: 30px 0px;
+  flex: 1 0 395px;
+}
+
+.learn-more-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.learn-more-button p {
+  color: #fff;
+  margin-bottom: 0;
+  margin-right: 15px;
+  text-transform: uppercase;
+}
+
+.list-item-title {
+  color: #fff !important;
+  display: block;
+  font-size: 21px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.list-item-subtitle {
+  display: block;
+  margin-top: 0.7rem;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.swiper-wrapper {
+  transition: 0.25s ease;
+}
+.swiper-container {
+  position: relative;
+}
+.swiper-container .nav {
+  position: absolute;
+  background: white;
+  top: calc(50% - 20px);
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-container .nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.swiper-container .nav.next {
+  right: 15px;
+  left: unset;
+}
+
+@media (max-width: 720px) {
+  .list-item {
+    flex-direction: column;
+  }
+  .list-item-left {
+    max-height: 150px;
+    overflow: hidden;
+  }
+  .list-item-right {
+    flex: 1;
+    padding: 16px;
+  }
+}
+</style>

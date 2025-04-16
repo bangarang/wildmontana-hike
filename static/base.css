@@ -9,7 +9,7 @@
   --color-bg-featured: #d9d9d9;
   --color-bg-filters-panel: #464646;
   --color-bg-filters: #505050;
-  --color-bg-highlight: #9e4749;
+  --color-bg-highlight: #b05c5c;
   --color-bg-placeholder: #e5e5e5;
   --color-bg-primary: #a1a1a1;
   --color-bg-primary-active: #999;
@@ -24,7 +24,7 @@
   --color-text-grey-lighter: #a1a1a1;
   --color-text-grey-lightest: #cacaca;
   --color-text-grey-medium: #555;
-  --color-text-highlight: #9e4749;
+  --color-text-highlight: #b05c5c;
   --color-text-primary: #a1a1a1;
   --color-text-primary-active: #999;
   --duration-shortest: 150ms;
@@ -135,8 +135,15 @@ body {
 .app input[type="url"],
 .app textarea,
 .app select {
-  width: 30%;
+  width: 100%;
   flex: 1; }
+
+.app .signup-fields input {
+  border-bottom: 1px solid var(--color-border-focus) !important; }
+
+.app .signup-fields label {
+  font-size: 15px;
+  font-weight: 700 !important; }
 
 .app input[type="email"]:focus,
 .app input[type="number"]:focus,
@@ -147,8 +154,7 @@ body {
 .app input[type="url"]:focus,
 .app textarea:focus,
 .app select:focus {
-  border-color: var(--color-border-focus);
-  outline: 0; }
+  border-color: var(--color-border-focus); }
 
 .app select {
   padding-right: 3rem;

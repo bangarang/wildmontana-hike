@@ -44,66 +44,76 @@ router.onReady(() => {
 
     const matches = {
       from: router.getMatchedComponents(from),
-      to: router.getMatchedComponents(to)
+      to: router.getMatchedComponents(to),
     };
 
-    const hooks = matches.to.map((c) => { console.log({c}); return c.prefetch} ).filter(fn => fn);
+    const hooks = matches.to
+      .map((c) => {
+        console.log({ c });
+        return c.prefetch;
+      })
+      .filter((fn) => fn);
 
     if (!hooks.length) {
-      setTimeout(() => { progress.finish(); next(); }, 500);
+      setTimeout(() => {
+        progress.finish();
+        next();
+      }, 500);
       return;
     }
 
-    Promise.all(hooks.map(fn => fn({ store, route: to, router })))
+    Promise.all(hooks.map((fn) => fn({ store, route: to, router })))
       .then(() => {
         progress.finish();
         next();
       })
-      .catch(err => {
+      .catch((err) => {
         progress.finish();
         next(err && err.url ? err.url : false);
       });
   });
 
-  app.$mount('#app');
+  app.$mount("#app");
 });
 
 // Update document overflow before transitioning to a new route.
 router.beforeEach((to, from, next) => {
-  if (typeof window != 'undefined') {
-    const overflow = to.name === 'index' ? 'hidden' : 'auto';
+  if (typeof window != "undefined") {
+    const overflow = to.name === "index" ? "hidden" : "auto";
     document.documentElement.style.overflow = overflow;
   }
   next();
 });
 
 // Register service worker, if supported.
-if (window.location.protocol === 'https:' && navigator.serviceWorker) {
-  navigator.serviceWorker.register('/worker.js')
-    .then(() => {
-      console.log('Service worker registration succeeded.');
-    }, err => {
-      console.error('Service worker registration failed.', err);
-    });
+if (window.location.protocol === "https:" && navigator.serviceWorker) {
+  navigator.serviceWorker.register("/worker.js").then(
+    () => {
+      console.log("Service worker registration succeeded.");
+    },
+    (err) => {
+      console.error("Service worker registration failed.", err);
+    }
+  );
 }
 
 // Monkey patching window.history
-(function(history) {
+(function (history) {
   var pushState = history.pushState;
-  history.pushState = function(state) {
-    if (typeof history.onpushstate == "function")
-    {
+  history.pushState = function (state) {
+    if (typeof history.onpushstate == "function") {
       history.onpushstate({
-        state: state
+        state: state,
       });
     }
     return pushState.apply(history, arguments);
-  }
+  };
 })(window.history);
-window.onpopstate = history.onpushstate = function(e)
-{
-  let params = (new URL(e.state.path)).searchParams
-  if (params.get('trail')){
-    router.replace({path: 'hike' , query: { trail: params.get('trail') }})
+window.onpopstate = history.onpushstate = function (e) {
+  let params = new URL(e.state.path).searchParams;
+  if (params.get("trail")) {
+    console.log({ trail: params.get("trail") });
+    // router.replace({path: `hike/trail/${params.get('trail')}` , query: { trail: params.get('trail') }})
+    // router.replace({ path: `/hike/trail/${params.get("trail")}` });
   }
 };

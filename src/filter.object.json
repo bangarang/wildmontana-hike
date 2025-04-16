@@ -1,0 +1,247 @@
+{
+    "9188b351-c9c7-4cfb-986e-2fc9df2fdf6e": {
+        "name": "Trail Features",
+        "options": [
+            {
+                "active": true,
+                "id": "7e163039-5b9d-495a-b42b-53fa0b5dff3a",
+                "label": "Butte / Badlands"
+            },
+            {
+                "active": false,
+                "id": "58b93b78-a060-4221-9103-e44dc8cd0078",
+                "label": "Canyon / Coulee"
+            },
+            {
+                "active": false,
+                "id": "cdae17a9-f8ff-4025-8acc-974e088b3118",
+                "label": "Cultural Site"
+            },
+            {
+                "active": false,
+                "id": "9396f704-e104-468b-a471-34cb3eabc6b3",
+                "label": "Established Campsite"
+            },
+            {
+                "active": false,
+                "id": "eb46d330-35b1-492c-9944-8c6f74545e0a",
+                "label": "Fall Foliage"
+            },
+            {
+                "active": false,
+                "id": "8f11379a-0270-4233-9c54-26b3c587571d",
+                "label": "Geological"
+            },
+            {
+                "active": false,
+                "id": "572798b3-8e3b-45bc-87b5-b152788f685a",
+                "label": "Geothermal Features"
+            },
+            {
+                "active": false,
+                "id": "7c2eba14-506d-4ea2-9cc3-e28ee261a3e9",
+                "label": "Lake"
+            },
+            {
+                "active": false,
+                "id": "a908715b-7a50-4004-9169-eb2e800b8987",
+                "label": "Old Growth Forest"
+            },
+            {
+                "active": false,
+                "id": "f6055c70-f20b-4f1d-89ec-290a98d8decc",
+                "label": "Ridge or Pass"
+            },
+            {
+                "active": false,
+                "id": "fb8a389c-04b8-4d75-81cd-23e638b457ca",
+                "label": "River / Stream"
+            },
+            {
+                "active": false,
+                "id": "f406f883-3431-480d-988f-75ce508b93d4",
+                "label": "Summit"
+            },
+            {
+                "active": false,
+                "id": "a61b080f-f9ec-4a71-80fb-64fb3a554666",
+                "label": "Views"
+            },
+            {
+                "active": false,
+                "id": "ae365aee-1afc-4a46-b950-7b7f75967f74",
+                "label": "Waterfall"
+            },
+            {
+                "active": false,
+                "id": "898ba9ac-62fc-4cb5-adfa-b53e5879a26d",
+                "label": "Wilderness Area"
+            },
+            {
+                "active": false,
+                "id": "b3099f2e-cff8-48fc-a4de-32caf40bceba",
+                "label": "Wilderness Study Area"
+            },
+            {
+                "active": false,
+                "id": "ba5c53f0-5255-49da-8288-a7a0275a367a",
+                "label": "Wildflowers / Meadows"
+            }
+        ]
+    },
+    "41a7ef6c-c6c0-41a7-90aa-85a97f805e49": {
+        "name": "Accessibility & Suitability",
+        "options": [
+            {
+                "active": false,
+                "id": "d58cdc38-2542-4e1d-8d94-1085e148a240",
+                "label": "Adaptive-friendly"
+            },
+            {
+                "active": false,
+                "id": "35051f7b-f8f2-43c3-a17c-d3ff72d7b714",
+                "label": "Dirt"
+            },
+            {
+                "active": false,
+                "id": "733c39af-b5d5-4324-951f-9c2bf17ab154",
+                "label": "Dog-friendly"
+            },
+            {
+                "active": false,
+                "id": "d741432e-5d9e-46c3-bae5-e1feb0310a8f",
+                "label": "Gravel"
+            },
+            {
+                "active": false,
+                "id": "e42c9fb4-0e23-479b-9df7-45658d35657c",
+                "label": "Kid-friendly"
+            },
+            {
+                "active": false,
+                "id": "2df60804-7c03-40c6-910a-7efa879857b4",
+                "label": "Parking Lot"
+            },
+            {
+                "active": false,
+                "id": "4a094768-b274-44fc-98fa-e7280de93919",
+                "label": "Paved"
+            },
+            {
+                "active": false,
+                "id": "386ec44d-e10f-4ffe-8121-b17ef1838e58",
+                "label": "Rocky"
+            },
+            {
+                "active": false,
+                "id": "f793a171-1a68-49bc-a671-29c4e6104ffd",
+                "label": "Trailhead Toilet"
+            }
+        ]
+    },
+    "59657dc4-86bf-42f2-aee9-929e601fdf59": {
+        "name": "Trail Activities",
+        "options": [
+            {
+                "active": false,
+                "id": "cfc4136e-edb1-4553-a820-d2c97fe632a7",
+                "label": "Adaptive Hiking"
+            },
+            {
+                "active": false,
+                "id": "243442b4-8d5c-45db-b2aa-97b8784dc10f",
+                "label": "Backcountry Skiing"
+            },
+            {
+                "active": false,
+                "id": "4e81d167-6c45-42da-b57a-655dd0ec0002",
+                "label": "Backpacking"
+            },
+            {
+                "active": false,
+                "id": "8b5a0a5b-26cb-48a3-8bf3-c6dd1bfa6439",
+                "label": "Bird Watching"
+            },
+            {
+                "active": false,
+                "id": "10b89f06-6f95-4b9c-a971-722fe8900393",
+                "label": "Camping"
+            },
+            {
+                "active": false,
+                "id": "f3329bbd-be79-4ba7-a793-42fa86be95bb",
+                "label": "Fishing"
+            },
+            {
+                "active": false,
+                "id": "184c4e9e-2758-431a-a9ce-14461e97693b",
+                "label": "Hiking"
+            },
+            {
+                "active": false,
+                "id": "7b77c95d-78d8-486e-9f2e-e5f0cc02bd91",
+                "label": "Horseback Riding"
+            },
+            {
+                "active": false,
+                "id": "4940b386-d5c1-4323-88d7-fcd7eb8cb94d",
+                "label": "Mountain Biking"
+            },
+            {
+                "active": false,
+                "id": "917405e6-0b8b-4628-91dc-d0d791e165c0",
+                "label": "Mountain Biking"
+            },
+            {
+                "active": false,
+                "id": "7f6a4e5b-8b4d-495b-8bd6-a2f02ceba9e7",
+                "label": "Paddle Sports"
+            },
+            {
+                "active": false,
+                "id": "8bdc4bb7-18b7-47fd-bf9f-490bf0c24d4b",
+                "label": "Paddle Sports"
+            },
+            {
+                "active": false,
+                "id": "3a8e08db-a6d2-4571-a0b7-1d20a8ded207",
+                "label": "Picnicking"
+            },
+            {
+                "active": false,
+                "id": "8226937c-36b6-4893-b685-ebbd51b39b60",
+                "label": "Rock Climbing"
+            },
+            {
+                "active": false,
+                "id": "a1b645f2-923f-491e-99af-ae376f8fa676",
+                "label": "Running"
+            },
+            {
+                "active": false,
+                "id": "1c78ed64-a865-4ca1-a3ee-58e0b7323a76",
+                "label": "Snowshoeing"
+            },
+            {
+                "active": false,
+                "id": "838dc0f7-b07c-458e-b73a-d534caa9a84d",
+                "label": "Swimming"
+            },
+            {
+                "active": false,
+                "id": "a91083d0-8c68-4635-822d-34279f4fab36",
+                "label": "Walking"
+            },
+            {
+                "active": false,
+                "id": "c62a7303-a362-4fa5-81a0-5d9ea113de0f",
+                "label": "Wildlife Watching"
+            },
+            {
+                "active": false,
+                "id": "0aa88e62-5518-4978-9681-b5e4f93f543d",
+                "label": "XC Skiing"
+            }
+        ]
+    }
+}

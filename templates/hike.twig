@@ -1,0 +1,39 @@
+{% extends 'templates/_hike_document.twig' %}
+
+{% block content %}
+	{#  <iframe src="http://127.0.0.1:9000/" frameborder="0" style="width: 100%; height: 100vh"></iframe>#}
+
+	{{ renderComponent('TrailTopSection', {'headline': post.meta('top_section_headline'), 'subheadline': post.meta('top_section_sub_headline'), 'image': post.meta('top_section_photo'), 'notificationActive': true, 'notificationHeadline': post.meta('trail_of_the_week_name'), 'notificationLink': post.meta('trail_of_the_week_link'), 'notificationRegion': post.meta('trail_of_the_week_region'), 'notificationLocation': post.meta('trail_of_the_week_location') }) }}
+	{% if post.meta('notification_active') %}
+		{{ renderComponent('NotificationBanner', {'bannerMessage': post.meta('notification_banner'), 'linkUrl': post.meta('notification_banner_link'), 'options': { 'theme': 'themeGreen'} }) }}
+	{% endif %}
+
+
+	<div id="app"></div>
+	{# <script>
+	    window.onload = function() {
+	      if (window.location.search.length > 0) {
+	        console.log('params found');
+	        setTimeout(function() {
+	          document.getElementById('app').scrollIntoView({
+	            behavior: 'smooth'
+	          });
+	        }, 1000)
+	      }
+	    }
+	
+	  </script> #}
+	<script src="/wp-content/themes/wild-montana-flynt/hike/dist/manifest.d29550ef00580db8e465.js" defer=""></script>
+	<script src="/wp-content/themes/wild-montana-flynt/hike/dist/0.0cb7dd9f502a07db26b0.js" defer=""></script>
+	<script src="/wp-content/themes/wild-montana-flynt/hike/dist/vendor.5b18ddd991df9dfd1871.js" defer=""></script>
+	<script src="/wp-content/themes/wild-montana-flynt/hike/dist/app.86cd8e20b7e0d4aef60e.js" defer=""></script>
+	<style>
+		[is=flynt-sponsor-grid] .grid-item {
+			margin-top: 15px;
+		}
+	</style>
+
+	{% for component in post.meta('pageComponents') %}
+		{{ renderComponent(component) }}
+	{% endfor %}
+{% endblock %}

@@ -156,7 +156,7 @@
 
         try {
           this.submitting = true;
-          await http.post(`/forms/${this.form}`, input);
+          await http.post(`https://wildmontana-hike.herokuapp.com/forms/${this.form}`, input);
           this.done = true;
           if (this.$ga) this.$ga.event('Form', 'submit', this.form);
         } catch (txn) {

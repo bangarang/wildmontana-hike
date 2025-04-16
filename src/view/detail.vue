@@ -37,7 +37,7 @@
                 <ui-icon name="arrow-right"></ui-icon>
               </div>
               <div class="badge">
-                <ui-icon name="walk" color="#8d1d1a" size="5rem"></ui-icon>
+                <ui-icon name="walk" color="#b05c5c" size="5rem"></ui-icon>
               </div>
             </a>
           </div>
@@ -56,7 +56,7 @@
             <div v-if="group.name === 'summary-box'" class="container">
               <section
                 :key="el.id"
-                v-for="(el, index) of group.elementList"
+                v-for="el of group.elementList"
                 :class="'element element-' + el.type"
               >
                 <div class="container">
@@ -71,6 +71,16 @@
                   </div>
                 </div>
               </section>
+            </div>
+            <div v-else-if="group.name === 'trailActivities'">
+              <div class="container">
+                <span
+                  class="activity"
+                  :key="el.id"
+                  v-for="el of group.elementList"
+                  >{{ el.text }}</span
+                >
+              </div>
             </div>
 
             <accordion v-else-if="group.name === 'accordion'">
@@ -94,8 +104,9 @@
                     >
                       <use
                         xlink:href="/static/icons.svg#icon-arrow-right"
-                      ></use></svg
-                  ></a>
+                      ></use>
+                    </svg>
+                  </a>
                   <component
                     :is="'element-' + el.type"
                     :element="el"
@@ -136,45 +147,256 @@
                 <div v-else class="read-more" @click="toggleTrailDescription">
                   Learn More +
                 </div>
+                <!-- <div class="signup">
+                  <router-link
+                    replace
+                    :to="{ name: 'signup' }"
+                    class="button signup-button"
+                  >
+                    <ui-icon name="report" size="1.5rem"></ui-icon>
+                    {{ $t("add_trail_report") }}
+                  </router-link>
+                </div> -->
               </div>
             </section>
 
-            <section v-else-if="group.name === 'newRelatedCampaigns'">
+            <!-- <section
+              v-else-if="group.name === 'relatedCampaigns'"
+              class="related-campaigns"
+            >
               <div class="container">
                 <h5 class="campaign--section--title">
                   Take Action to Protect this Landscape
                 </h5>
-                <div v-for="el of group.elementList" class="new--campaign">
-                  <img
-                    class="campaign--image"
-                    v-if="el.image"
-                    :src="el.image"
-                  />
-                  <p class="campaign--title" v-if="el.title">{{ el.title }}</p>
-                  <p class="campaign--subtitle" v-if="el.summary">
-                    {{ el.summary }}
+                <div
+                  class="sub-container"
+                  v-for="campaign of group.elementList[0].data"
+                  :key="campaign.id"
+                >
+                  <p class="campaign--title" v-if="campaign.title">
+                    {{ campaign.title }}
                   </p>
-                  <a
-                    class="campaign--link"
-                    target="_blank"
-                    v-if="el.linkText"
-                    :href="el.linkUrl"
-                    >{{ el.linkText }}
-                    <svg
-                      data-v-3803ee32=""
-                      data-v-07d7779b=""
-                      class="icon icon-arrow-right"
-                      style="color: inherit; font-size: 24px"
+                </div>
+              </div>
+            </section> -->
+
+            <!-- <section v-else-if="group.name ==='trailReports'">
+              <div class="related-campaigns">
+                <div class="container">
+                  <div class="list"> 
+                    <a
+                      v-for="el of group.elementList"
+                      target="_blank"
+                      rel="noopener"
+                      class="list-item"
+                      :href="el.linkUrl"
+                      :key="el.id"
                     >
-                      <use
-                        data-v-3803ee32=""
-                        xlink:href="/static/icons.svg#icon-arrow-right"
-                      ></use></svg
-                  ></a>
+                      <div class="list-item-left">
+                        <img
+                          class="list-item-image"
+                          v-if="el.image"
+                          :src="el.image"
+                          :alt="el.title"
+                        />
+                      </div>
+                      <div class="list-item-right">
+                        <div v-if="el.subtitle" class="list-item-subtitle">
+                          {{ el.subtitle }}
+                        </div>
+                        <div class="list-item-title">{{ el.title }}</div>
+                        <div class="learn-more-button">
+                          <p class="sans white">Learn More</p>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30.895"
+                            height="10.723"
+                            viewBox="0 0 30.895 10.723"
+                          >
+                            <g
+                              id="Componente_3_51"
+                              data-name="Componente 3 – 51"
+                              transform="translate(1.5)"
+                            >
+                              <path
+                                id="Trazado_115"
+                                data-name="Trazado 115"
+                                d="M943,5328.771h19.892"
+                                transform="translate(-943 -5323.409)"
+                                fill="none"
+                                stroke="#fffefa"
+                                stroke-linecap="round"
+                                stroke-width="3"
+                              ></path>
+                              <path
+                                id="Trazado_125"
+                                data-name="Trazado 125"
+                                d="M4.765.345a.689.689,0,0,1,1.194,0L10.63,8.47a.689.689,0,0,1-.6,1.032H.69a.689.689,0,0,1-.6-1.032Z"
+                                transform="translate(29.395 0) rotate(90)"
+                                fill="#fffefa"
+                              ></path>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>  
+            </section> -->
+
+            <section v-else-if="group.name === 'newRelatedCampaigns'">
+              <div class="related-campaigns">
+                <div class="container">
+                  <!-- <div class="list"> -->
+                  <h5 class="campaign--section--title" style="#163c47">
+                    About This Landscape
+                  </h5>
+                  <div
+                    class="campaign-list swiper-container"
+                    :id="group.id"
+                    ref="relatedCampaignsSwiper"
+                  >
+                    <div
+                      class="swiper-wrapper"
+                      :style="`transform: translateX(-${
+                        relatedCampaignsSwiperActive * 100
+                      }%);`"
+                    >
+                      <div
+                        v-for="el of group.elementList"
+                        :key="el.id"
+                        class="campaign-item swiper-slide"
+                      >
+                        <img
+                          class="campaign-image"
+                          v-if="el.image"
+                          :src="el.image"
+                        />
+                        <div class="campaign-content">
+                          <div class="campaign-title">{{ el.headline }}</div>
+                          <p class="campaign--subtitle" v-if="el.summary">
+                            {{ el.summary }}
+                          </p>
+                          <a
+                            class="learn-more-button"
+                            target="_blank"
+                            rel="noopener"
+                            :href="el.linkUrl"
+                          >
+                            <p class="sans red">Learn More</p>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30.895"
+                              height="10.723"
+                              viewBox="0 0 30.895 10.723"
+                            >
+                              <g
+                                id="Componente_3_51"
+                                data-name="Componente 3 – 51"
+                                transform="translate(1.5)"
+                              >
+                                <path
+                                  id="Trazado_115"
+                                  data-name="Trazado 115"
+                                  d="M943,5328.771h19.892"
+                                  transform="translate(-943 -5323.409)"
+                                  fill="none"
+                                  stroke="#b05c5c"
+                                  stroke-linecap="round"
+                                  stroke-width="3"
+                                ></path>
+                                <path
+                                  id="Trazado_125"
+                                  data-name="Trazado 125"
+                                  d="M4.765.345a.689.689,0,0,1,1.194,0L10.63,8.47a.689.689,0,0,1-.6,1.032H.69a.689.689,0,0,1-.6-1.032Z"
+                                  transform="translate(29.395 0) rotate(90)"
+                                  fill="#b05c5c"
+                                ></path>
+                              </g>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      v-if="group.elementList.length > 1"
+                      class="nav previousRelatedCampaigns"
+                      @click="previousRelatedCampaigns"
+                    >
+                      <ui-icon name="arrow-left" size="2.2rem"></ui-icon>
+                    </div>
+                    <div
+                      v-if="group.elementList.length > 1"
+                      @click="nextRelatedCampaigns"
+                      class="nav nextRelatedCampaigns"
+                    >
+                      <ui-icon name="arrow-right" size="2.2rem"></ui-icon>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
 
+            <!-- <section
+              v-else-if="group.name === 'business'"
+              :key="el.id"
+              v-for="el of group.elementList"
+              :class="
+                'element element-' +
+                el.type +
+                ' ' +
+                slug(el.name) +
+                ' ' +
+                el.id
+              "
+            >
+              <div class="container">
+                <div class="sub-container">
+                  <p>ELEMENT: {{ JSON.stringify(el) }}</p>
+                  <component
+                    :is="'element-' + el.type"
+                    :element="el"
+                    :key="id + '::' + el.id"
+                    :measurementUnit="getMeasurementUnit(el.id)"
+                    :slug="slug(entry.title)"
+                  ></component>
+                </div>
+              </div>
+              <div
+                v-if="group.name === 'description'"
+                class="container"
+                style="display: flex"
+              >
+                <ui-share color="white"></ui-share>
+              </div>
+            </section> -->
+            <section
+              v-else-if="group.name === 'secondary'"
+              :key="el.id"
+              v-for="el of group.elementList"
+              :class="
+                'element element-' + el.type + ' ' + slug(el.name) + ' ' + el.id
+              "
+            >
+              <div class="sub-container">
+                <p v-if="el.name" class="subheading">{{ el.name }}</p>
+                <component
+                  :is="'element-' + el.type"
+                  :element="el"
+                  :key="id + '::' + el.id"
+                  :measurementUnit="getMeasurementUnit(el.id)"
+                  :slug="slug(entry.title)"
+                ></component>
+              </div>
+              <div
+                v-if="group.name === 'description'"
+                class="container"
+                style="display: flex"
+              >
+                <ui-share color="white"></ui-share>
+              </div>
+            </section>
             <section
               v-else
               :key="el.id"
@@ -184,8 +406,17 @@
               "
             >
               <div class="container">
+                <div v-if="el.name === 'Trail Reports'" class="signup">
+                  <router-link
+                    replace
+                    :to="{ name: 'signup' }"
+                    class="button signup-button"
+                  >
+                    <ui-icon name="report" size="1.5rem"></ui-icon>
+                    {{ $t("add_trail_report") }}
+                  </router-link>
+                </div>
                 <div class="sub-container">
-                  <p v-if="el.name" class="subheading">{{ el.name }}</p>
                   <component
                     :is="'element-' + el.type"
                     :element="el"
@@ -216,7 +447,7 @@
           <section v-if="cta">
             <protect-wilderness></protect-wilderness>
           </section>
-          <section>
+          <section class="fellow-public-land-explorer" v-if="report">
             <div class="container">
               <p style="text-align: center">
                 This hike was submitted by a fellow public lands explorer. If
@@ -302,7 +533,6 @@ export default {
     };
   },
   async prefetch({ store, route }) {
-    console.log({ route });
     try {
       await store.dispatch("entries", {
         first: true,
@@ -352,6 +582,15 @@ export default {
     return {
       user: null,
       trailDescription: false,
+      entries: [],
+      newRelatedCampaignsEntries: [],
+      lastFetchedRelatedCampaigns: null,
+      isLoadingCampaigns: false,
+      relatedCampaignsSwiperInitialized: false,
+      relatedCampaignsSwiperActive: 0,
+      trailReportsSwiperInitialized: false,
+      trailReportsSwiperActive: 0,
+      lastFetchedEntry: null,
     };
   },
   computed: {
@@ -382,159 +621,174 @@ export default {
         if (el.type === "geo" && !Array.isArray(el.data.features)) return false;
         return true;
       });
-
-      return enabled.map((el) => ({
+      const elements = enabled.map((el) => ({
         ...el,
         name: el.groups.some((id) => id === hide.name) ? "" : el.name,
       }));
+      console.log({ elements });
+      // Check if there's a Trail Reports element
+      const hasTrailReports = elements.some(el => el.name === 'Trail Reports');
+      
+      // If not, add a Trail Reports element
+      if (!hasTrailReports) {
+        elements.push({
+          id: 'trail-reports',
+          name: 'Trail Reports',
+          type: 'text',
+          data: '',
+          groups: []
+        });
+      }
+      return elements;
     },
     entry() {
       return this.$store.state.entries[this.id];
     },
+    business() {
+      return this.entry.type === "business";
+    },
+    report() {
+      return this.entry.type === "trail";
+    },
 
     detailGroups() {
-      // categories elements into different groups
-      const details = [...config.id.group.element.details];
-      const categorized = [];
-      const groups = details.map((group) => {
-        const elements = this.elements.filter((el) => {
-          const inGroup = group.elements.includes(el.id);
-          if (inGroup) {
-            categorized.push(el.id);
-            return true;
-          }
-          return false;
+      if (this.entry.type === "business") {
+        const nonNullElements = this.entry.elements.filter(
+          (el) => el.data !== null && el.name !== "Link URL"
+        );
+
+        return [
+          {
+            name: "business",
+            elementList: nonNullElements,
+          },
+        ];
+      } else {
+        // categories elements into different groups
+        const details = [...config.id.group.element.details];
+        const categorized = [];
+        const groups = details.map((group) => {
+          const elements = this.elements.filter((el) => {
+            const inGroup = group.elements.includes(el.id);
+            if (inGroup) {
+              categorized.push(el.id);
+              return true;
+            }
+            return false;
+          });
+          group.elementList = elements;
+          return group;
         });
-        group.elementList = elements;
-        return group;
-      });
 
-      // add into other group which are not categorized
-      const secondaryNameArray = ["Trail Features", "Seasons", "Trail Surface"];
-      const accordionNameArray = [
-        "Getting Here",
-        "Vehicle Access to Trailhead",
-        "Shown in Map or Guidebook",
-        "Fees / Restrictions / Notes",
-        "Contacts",
-        "Nearby Businesses",
-      ];
+        // add into other group which are not categorized
+        const secondaryNameArray = [
+          "Seasons",
+          "Trail Surface",
+          "Accessibility & Suitability",
+        ];
+        const accordionNameArray = [
+          "Getting Here",
+          "Vehicle Access to Trailhead",
+          "Shown in Map or Guidebook",
+          "Fees / Restrictions / Notes",
+          "Contacts",
+          "Nearby Businesses",
+        ];
 
-      const trailDescription = "84ff3b6b-5737-46fc-affa-fc71ac250683";
-      const contactManagingAgency = "169afa99-a581-4846-8f23-1112079cdd99";
-      const trailDescriptionGroup = {
-        name: "trailDescription",
-        elementList: this.elements.filter((el) => el.id === trailDescription),
-      };
+        const trailDescription = "84ff3b6b-5737-46fc-affa-fc71ac250683";
+        const contactManagingAgency = "169afa99-a581-4846-8f23-1112079cdd99";
+        const trailDescriptionGroup = {
+          name: "trailDescription",
+          elementList: this.elements.filter((el) => el.id === trailDescription),
+        };
 
-      const relatedCampaignsGroup = {
-        name: "relatedCampaigns",
-        elementList: this.elements.filter(
-          (el) => el.name === "Related Campaigns"
-        ),
-      };
+        const relatedCampaignsGroup = {
+          name: "relatedCampaigns",
+          elementList: this.elements.filter(
+            (el) => el.name === "Related Campaigns"
+          ),
+        };
 
-      // console.log({ relatedCampaignsGroup: relatedCampaignsGroup.elementList });
+        const newRelatedCampaignsGroup = {
+          name: "newRelatedCampaigns",
+          elementList: this.newRelatedCampaignsEntries,
+        };
 
-      const newRelatedCampaignsEntries =
-        relatedCampaignsGroup.elementList &&
-        relatedCampaignsGroup.elementList[0]
-          ? relatedCampaignsGroup.elementList[0].data
-              .map((el) => {
-                const campaignEntry = this.campaignEntry(el.id);
-                if (campaignEntry) {
-                  const campaignSummary = campaignEntry.elements.find(
-                    (item) => item.name === "Summary"
-                  );
-                  const campaignLinkText = campaignEntry.elements.find(
-                    (item) => item.name === "Link Text"
-                  );
-                  const campaignLinkUrl = campaignEntry.elements.find(
-                    (item) => item.name === "Link URL"
-                  );
-                  const campaignImages = campaignEntry.elements.find(
-                    (item) => item.name === "Images"
-                  );
-                  // console.log({
-                  //   campaignSummary,
-                  //   campaignLinkText,
-                  //   campaignLinkUrl,
-                  //   campaignImages,
-                  // });
-                  return {
-                    title: el.title,
-                    summary: campaignSummary.data,
-                    linkText: campaignLinkText.data,
-                    linkUrl: campaignLinkUrl.data,
-                    image: campaignImages.data[0].url,
-                  };
-                }
-              })
-              .filter((a) => a !== undefined)
-          : [];
+        const secondaryGroups = {
+          name: "secondary",
+          elementList: this.elements.filter(
+            (el) =>
+              !categorized.includes(el.id) &&
+              secondaryNameArray.includes(el.name) &&
+              !accordionNameArray.includes(el.name)
+          ),
+        };
+        const trailActivitiesGroup = {
+          name: "trailActivities",
+          elementList: this.elements
+            .filter((el) =>
+              ["Trail Activities", "Trail Features"].includes(el.name)
+            )
+            .flatMap((el) => el.data),
+        };
 
-      const newRelatedCampaignsGroup = {
-        name: "newRelatedCampaigns",
-        elementList: newRelatedCampaignsEntries,
-      };
+        const trailReportsGroup = {
+          name: "trailReports",
+          elementList: this.elements
+            .filter((el) => ["Trail Reports"].includes(el.name))
+            .flatMap((el) => el.data),
+        };
+        console.log({ trailReportsGroup });
 
-      // console.log({
-      //   newRelatedCampaignsGroup: newRelatedCampaignsGroup.elementList,
-      // });
+        const accordionGroups = {
+          name: "accordion",
+          elementList: this.elements.filter(
+            (el) =>
+              (!categorized.includes(el.id) &&
+                accordionNameArray.includes(el.name)) ||
+              (el.type === "geo" && !secondaryNameArray.includes(el.name)) ||
+              el.id === contactManagingAgency
+          ),
+        };
 
-      const secondaryGroups = {
-        name: "secondary",
-        elementList: this.elements.filter(
-          (el) =>
-            !categorized.includes(el.id) &&
-            secondaryNameArray.includes(el.name) &&
-            !accordionNameArray.includes(el.name)
-        ),
-      };
-      const accordionGroups = {
-        name: "accordion",
-        elementList: this.elements.filter(
-          (el) =>
-            (!categorized.includes(el.id) &&
-              accordionNameArray.includes(el.name)) ||
-            (el.type === "geo" && !secondaryNameArray.includes(el.name)) ||
-            el.id === contactManagingAgency
-        ),
-      };
+        const otherGroup = {
+          name: "other",
+          elementList: this.elements.filter(
+            (el) =>
+              !categorized.includes(el.id) &&
+              !secondaryNameArray.includes(el.name) &&
+              !accordionNameArray.includes(el.name) &&
+              el.type !== "geo" &&
+              el.name !== "Related Campaigns" &&
+              el.name !== "Trail Activities" &&
+              el.name !== "Trail Features" &&
+              // el.name !== "Trail Reports" &&
+              el.id !== trailDescription &&
+              el.id !== contactManagingAgency &&
+              (el.name === "Trail Reports"
+                ? Object.assign(el, { config: { type: "swiper" } })
+                : true)
+          ),
+        };
+        const allGroups = [
+          ...groups,
+          trailActivitiesGroup,
+          secondaryGroups,
+          trailDescriptionGroup,
+          otherGroup,
+          // trailReportsGroup,
+          accordionGroups,
+          newRelatedCampaignsGroup,
+        ].filter((g) => g.elementList.length > 0);
 
-      const otherGroup = {
-        name: "other",
-        elementList: this.elements.filter(
-          (el) =>
-            !categorized.includes(el.id) &&
-            !secondaryNameArray.includes(el.name) &&
-            !accordionNameArray.includes(el.name) &&
-            el.type !== "geo" &&
-            el.name !== "Related Campaigns" &&
-            el.id !== trailDescription &&
-            el.id !== contactManagingAgency
-        ),
-      };
-      const allGroups = [
-        ...groups,
-        secondaryGroups,
-        trailDescriptionGroup,
-        relatedCampaignsGroup,
-        otherGroup,
-        accordionGroups,
-        newRelatedCampaignsGroup,
-      ].filter((g) => g.elementList.length > 0);
+        const summaryIndex = allGroups.findIndex(
+          (group) => group.name === "summary-box"
+        );
 
-      // console.log({ allGroups });
-
-      const summaryIndex = allGroups.findIndex(
-        (group) => group.name === "summary-box"
-      );
-
-      // console.log({ elements: this.elements, accordionGroups, allGroups });
-      array_move(allGroups, summaryIndex, 0);
-
-      return allGroups;
+        console.log({ allGroups, otherGroup });
+        array_move(allGroups, summaryIndex, 0);
+        return allGroups;
+      }
     },
     sponsors() {
       const sponsors = [];
@@ -606,7 +860,7 @@ export default {
       // this.$router.go(-1)
       // this.$router.push("/hike");
       if (this.$route.params.slug) {
-        this.$router.push(`/hike?trail=${this.$route.params.slug}`);
+        this.$router.push(`/hike/trail/${this.$route.params.slug}`);
       } else {
         this.$router.push(`/hike`);
       }
@@ -617,46 +871,272 @@ export default {
     slug(string) {
       return slug(string);
     },
-    campaignEntry(id) {
-      return this.$store.state.entries[id];
+    async campaignEntry(id) {
+      console.log(`Initiating campaign entry fetch for id: ${id}`);
+      const dispatchEntry = await this.$store.dispatch("entries", {
+        first: true,
+        params: { id },
+      });
+      console.log({ dispatchEntry });
+      return dispatchEntry;
     },
+    // const dispatchEntry = this.$store.dispatch("entries", {
+    //   first: true,
+    //   params: { id },
+    // });
+    // console.log({ dispatchEntry });
+
+    // return dispatchEntry;
     toggleTrailDescription() {
       // console.log({ trailDescription: this.trailDescription });
       this.trailDescription = !this.trailDescription;
     },
+    async getEntry(id) {
+      try {
+        return await this.$store.dispatch("entries", {
+          first: true,
+          // params: { id: route.params.id || route.meta.id },
+          // params: { id: "c9641ce3-a9c2-431e-b029-8085c26821e4" },
+          params: { id },
+          // previewing: route.query.preview === "true",
+        });
+      } catch (err) {
+        if (err && err.code !== 404) console.error(err);
+        throw { code: 404 };
+      }
+    },
+
+    async getEntries() {
+      const promises = [];
+
+      let params =
+        this.$route.meta && this.$route.meta.params
+          ? this.$route.meta.params
+          : {};
+      if (typeof params == "function") params = params();
+      if (typeof params != "object" || params === null) params = {};
+
+      for (const p in params) {
+        const v = params[p];
+        if (Array.isArray(v)) params[p] = v.join();
+        else if (typeof v == "string") params[p] = v;
+      }
+
+      let page = 1;
+      const limit = 25;
+      // const total = this.$store.state.total || 0;
+      const total = 1000;
+      const last = total > 0 ? Math.ceil(total / limit) : 1;
+
+      while (true) {
+        if (page > last) break;
+        const options = {
+          params: { order: "title", limit, page, ...params },
+          previewing: this.$route.query.preview === "true",
+        };
+        const p = this.$store
+          .dispatch("entries", options)
+          .then(({ index = [] }) => this.push(index))
+          .catch((err) => console.error(err.message));
+        promises.push(p);
+        page += 1;
+        // console.log({ page, last, total, params });
+      }
+
+      return Promise.all(promises);
+    },
+    async fetchRelatedCampaigns() {
+      const id = this.entry.id;
+      if (id === this.lastFetchedEntry) {
+        return;
+      }
+      this.lastFetchedEntry = id;
+      this.newRelatedCampaignsEntries = [];
+      if (
+        this.newRelatedCampaignsEntries.length > 0 ||
+        this.isLoadingCampaigns
+      ) {
+        return;
+      }
+
+      this.isLoadingCampaigns = true;
+      const relatedCampaignsGroup = {
+        name: "relatedCampaigns",
+        elementList: this.elements.filter(
+          (el) => el.name === "Related Campaigns"
+        ),
+      };
+
+      try {
+        const campaigns = await Promise.all(
+          relatedCampaignsGroup.elementList[0].data.map(async (el) => {
+            const campaignEntry = await this.campaignEntry(el.id);
+            if (!campaignEntry) return null;
+            console.log({ campaignEntry });
+            const findElement = (name) =>
+              campaignEntry.elements.find((item) => item.name === name);
+            const campaignSummary = findElement("Summary") || {};
+            const campaignLinkText = findElement("Link Text") || {};
+            const campaignLinkUrl = findElement("Link URL") || {};
+            const campaignImages = findElement("Images") || {};
+
+            return {
+              title: el.title,
+              summary: campaignSummary.data,
+              linkText: campaignLinkText.data,
+              linkUrl: campaignLinkUrl.data,
+              image: campaignImages.data[0].url,
+              headline: campaignEntry.elements.find(
+                (item) => item.name === "Headline"
+              ).data,
+            };
+          })
+        );
+
+        this.newRelatedCampaignsEntries = campaigns.filter(Boolean);
+        console.log("fetchRelatedCampaigns -> done", {
+          newRelatedCampaignsEntries: this.newRelatedCampaignsEntries,
+        });
+      } catch (error) {
+        console.error("Error fetching related campaigns:", error);
+        this.newRelatedCampaignsEntries = [];
+      } finally {
+        this.isLoadingCampaigns = false;
+      }
+    },
+    // async fetchRelatedCampaigns() {
+    //   console.log("fetchRelatedCampaigns");
+    //   if (
+    //     !this.newRelatedCampaignsEntries[0] ||
+    //     this.isLoadingCampaigns
+    //   ) {
+    //     console.log("fetchRelatedCampaigns -> return");
+    //     return;
+    //   }
+
+    //   this.isLoadingCampaigns = true;
+    //   await Promise.all(
+    //     this.relatedCampaignsGroup.elementList[0].data.map(async (el) => {
+    //       try {
+    //         const campaignEntry = await this.campaignEntry(el.id);
+    //         console.log({ campaignEntry });
+    //         if (campaignEntry) {
+    //           const campaignSummary = campaignEntry.elements.find(
+    //             (item) => item.name === "Summary"
+    //           );
+    //           const campaignLinkText = campaignEntry.elements.find(
+    //             (item) => item.name === "Link Text"
+    //           );
+    //           const campaignLinkUrl = campaignEntry.elements.find(
+    //             (item) => item.name === "Link URL"
+    //           );
+    //           const campaignImages = campaignEntry.elements.find(
+    //             (item) => item.name === "Images"
+    //           );
+    //           console.log({
+    //             campaignSummary,
+    //             campaignLinkText,
+    //             campaignLinkUrl,
+    //             campaignImages,
+    //           });
+    //           return {
+    //             title: el.title,
+    //             summary: campaignSummary.data,
+    //             linkText: campaignLinkText.data,
+    //             linkUrl: campaignLinkUrl.data,
+    //             image: campaignImages.data[0].url,
+    //           };
+    //         }
+    //       } catch (error) {
+    //         console.error(`Error processing campaign ${el.id}:`, error);
+    //         return undefined;
+    //       }
+    //     })
+    //   )
+    //     .then((results) => results.filter((a) => a !== undefined))
+    //     .then((filteredResults) => {
+    //       this.newRelatedCampaignsEntries = filteredResults;
+    //       this.isLoadingCampaigns = false;
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching related campaigns:", error);
+    //       this.newRelatedCampaignsEntries = [];
+    //       this.isLoadingCampaigns = false;
+    //     });
+    //   console.log("fetchRelatedCampaigns done", {
+    //     newRelatedCampaignsEntries: this.newRelatedCampaignsEntries,
+    //     isLoadingCampaigns: this.isLoadingCampaigns,
+    //   });
+    // },
+    push(entries, key = "primary") {
+      this.$store.commit("ids", { key, val: entries.map((en) => en.id) });
+      this.entries.push(...entries);
+    },
+    nextRelatedCampaigns() {
+      if (
+        this.relatedCampaignsSwiperActive <
+        this.newRelatedCampaignsEntries.length - 1
+      ) {
+        this.relatedCampaignsSwiperActive += 1;
+      }
+    },
+
+    previousRelatedCampaigns() {
+      if (this.relatedCampaignsSwiperActive > 0) {
+        this.relatedCampaignsSwiperActive -= 1;
+      }
+    },
+    nextTrailReport() {
+      if (
+        this.trailReportSwiperActive <
+        this.newTrailReportEntries.length - 1
+      ) {
+        this.trailReportSwiperActive += 1;
+      }
+    },
+
+    previousTrailReport() {
+      if (this.trailReportSwiperActive > 0) {
+        this.trailReportSwiperActive -= 1;
+      }
+    },
   },
-  mounted() {
-    // if (
-    //   window.dataLayer &&
-    //   slug(this.entry.id) === "sign-up-to-add-trails-and-trail-reports"
-    // ) {
-    //   console.log("SIGNUP MOUNTED", {
-    //     entry: this.entry,
-    //     title: slug(this.entry.id),
-    //   });
-    //   window.dataLayer.push({
-    //     event: "Add a Trail",
-    //     pageUrl: window.location.href, //URL shown in URL bar
-    //     // pageTitle: "Hike Wild Montana - Allen Peak Trail 466", //site name - {trail name},
-    //     // trailName: "Allen Peak Trail 466",
-    //     action: "Click - Add Trail",
-    //   });
-    // }
-    // if (window.dataLayer) {
-    //   window.dataLayer.push({
-    //     event: "virtualPageview",
-    //     pageUrl: window.location.href, //URL shown in URL bar
-    //     pageTitle: `Hike Wild Montana - ${this.entry.title}`, //site name - {trail name},
-    //     trailName: this.entry.title,
-    //     action: "Click - Navigation Link",
-    //   });
-    // }
+
+  async mounted() {
+    const id = this.$route.params.id;
+    if (id) {
+      this.getEntry(id);
+      // this.getEntries().then(() => {
+      //   this.getEntry(id);
+
+      //   const entriesFound = this.entries.filter((en) => en.id === id);
+      //   if (entriesFound && entriesFound.length) {
+      //     this.entry = entriesFound[0];
+      //   } else {
+      //     this.entry = null;
+      //   }
+      //   console.log("GET ENTRIES -> getEntry", {
+      //     entry: this.entry,
+      //     entries: this.entries,
+      //     entriesFound,
+      //   });
+      // });
+      // this.getEntry(id);
+    } else {
+      this.getEntry(config.id.entry.signup);
+    }
     if (this.entry.type === "report" && this.entry.users.length) {
       this.getUser();
     }
     if (this.context === "app") {
       document.documentElement.style.overflow = "auto";
     }
+  },
+  async updated() {
+    await this.fetchRelatedCampaigns();
+  },
+  async created() {
+    await this.fetchRelatedCampaigns();
   },
   // updated() {
   //   console.log("DETAIL UPDATED", {
@@ -675,8 +1155,64 @@ export default {
 </script>
 
 <style scoped>
-.relatedCampaigns {
-  display: none;
+.related-campaigns {
+  /* display: none; */
+  color: #163c47;
+}
+.campaign-image {
+  border-radius: 8px;
+  border-radius: 8px;
+  max-height: 350px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.campaign-content {
+  padding: 1rem 0;
+}
+
+.campaign-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-grey);
+  font-weight: var(--font-weight-heavy);
+  margin-bottom: 5px;
+}
+.swiper-wrapper {
+  transition: 0.25s ease;
+}
+.red {
+  color: #b05c5c !important;
+}
+.related-campaigns .learn-more-button {
+  color: #b05c5c;
+  margin: 1rem 0;
+}
+.campaign-list {
+  position: relative;
+}
+.campaign-list .nav {
+  position: absolute;
+  background: white;
+  z-index: 10;
+  top: 155px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campaign-list .nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.campaign-list .nav.nextRelatedCampaigns {
+  right: 15px;
+  left: unset;
 }
 
 .detail-view.context-app {
@@ -730,13 +1266,6 @@ export default {
 }
 
 @media (min-width: 768px) {
-  .detail-view {
-  }
-
-  .content {
-    //padding: 0 20px;
-  }
-
   .heading h1 {
     margin-top: 2rem;
   }
@@ -746,6 +1275,10 @@ section {
   position: relative;
   padding-bottom: 2rem;
   margin: 0 auto;
+}
+
+section.trailDescription {
+  padding-bottom: 1rem;
 }
 
 .h4 {
@@ -829,18 +1362,24 @@ section {
 .image,
 .summary-box,
 .other,
-.description {
+.description,
+.newRelatedCampaigns {
   padding-bottom: 0;
 }
 
 .secondary {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 30px 15px;
 }
 
 .secondary section {
   margin: 0;
   padding-bottom: 0;
+  padding-right: 50px;
+}
+.secondary section:last-child {
+  padding-right: 0;
 }
 
 .summary-box {
@@ -874,6 +1413,7 @@ section {
   font-family: "Lato", sans-serif;
   color: #fff;
   margin-bottom: 0;
+  text-align: left;
 }
 .summary-box .element >>> .subheading::after {
   content: ":";
@@ -947,5 +1487,123 @@ section {
 
 .detail-view.context-panel .heading {
   display: none;
+}
+@media (max-width: 768px) {
+  .secondary section {
+    max-width: unset;
+  }
+}
+</style>
+
+<style scoped>
+.list-item {
+  margin-bottom: 1rem;
+  background: #163c47 !important;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+@media (min-width: 720px) {
+  .list-item {
+    margin-bottom: 10px;
+  }
+  .list-item-left {
+    margin-right: 15px;
+    width: 150px;
+    flex: 1 0 150px;
+  }
+}
+
+.list-item-image {
+  display: block;
+  min-height: 100%;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.list-item-image,
+.list-item-image > img {
+  border-radius: 8px;
+}
+
+.list-item-right {
+  display: inline-block;
+  vertical-align: top;
+  padding: 30px 0px;
+  flex: 1 0 375px;
+  max-width: 375px;
+}
+
+.learn-more-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.learn-more-button p {
+  color: #fff;
+  margin-bottom: 0;
+  margin-right: 15px;
+  text-transform: uppercase;
+}
+
+.list-item-title {
+  color: #fff !important;
+  display: block;
+  font-size: 21px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.list-item-subtitle {
+  display: block;
+  margin-top: 0.7rem;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.3;
+  color: #fff;
+}
+.activity {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  padding: 0px 10px;
+  border: 1.8px solid #163c47;
+  color: #163c47;
+  font-size: 14px;
+  line-height: 1.6rem;
+  font-weight: 400;
+}
+
+.signup {
+  margin-top: 30px;
+}
+.signup a {
+  border: none;
+  background-color: var(--color-bg-highlight);
+}
+
+.signup a > .icon {
+  margin-top: -1px;
+  margin-right: 5px;
+}
+
+@media (max-width: 720px) {
+  .list-item {
+    flex-direction: column;
+  }
+  .list-item-left {
+    max-height: 150px;
+    overflow: hidden;
+  }
+  .list-item-right {
+    flex: 1;
+    padding: 16px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 const config = {
   app: {
     color: {
-      highlight: "#8d1d1a",
+      highlight: "#b05c5c",
     },
     trailViewLimit: 2,
   },

@@ -46,6 +46,6 @@
     margin-left: 18px;
   }
   div.data::marker {
-    color: #9e4749;
+    color: #b05c5c;
   }
 </style>

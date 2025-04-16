@@ -131,13 +131,13 @@ export default {
   margin-left: 12px;
 }
 
-.filter label input[type="checkbox"] {
+/* .filter label input[type="checkbox"] {
   opacity: 1;
   width: unset;
   pointer-events: all;
   left: -10px;
   top: 5px;
-}
+} */
 
 .filter.active label {
   color: #e7e7e7;

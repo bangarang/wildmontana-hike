@@ -29,7 +29,7 @@ Object.keys(filters).forEach(f => {
 // Vue plugins
 Vue.use(I18n);
 Vue.use(Router);
-Vue.use(Scroll, { easing: 'ease-in-out', offset: -90 });
+// Vue.use(Scroll, { easing: 'ease-in-out', offset: -90 });
 Vue.use(Share);
 
 export function init(api) {

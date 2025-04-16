@@ -164,7 +164,7 @@
   }
   @media (max-width: 720px) {
     .search {
-      left: -175px;
+      left: -200px;
     }
   }
 
