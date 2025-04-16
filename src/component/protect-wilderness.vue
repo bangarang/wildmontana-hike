@@ -1,6 +1,8 @@
 <template>
   <div class="form-wrapper">
-    <p class="intro-text">{{ protect_wilderness_intro }}</p>
+    <!-- <p class="intro-text">{{ protect_wilderness_intro }}</p> -->
+    <h5>Subscribe to Our Newsletter</h5>
+    <p class="intro-text">Sign up to receive our monthly recreation newsletter for recommended hikes, volunteer trail stewardship opportunities, and more.</p>
     <div :key="e.id" v-for="e of errors" class="alert alert-error">
       {{ e.text }}
     </div>
